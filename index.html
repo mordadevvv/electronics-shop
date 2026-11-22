@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="uk">
+<meta charset="utf-8">
+<title>Покупка електроніки онлайн</title>
+<style>body{font:18px system-ui;max-width:38rem;margin:4rem auto;padding:1rem}label,output{display:block;margin:1rem 0}select,input,button{font:inherit;padding:.4rem}</style>
+<h1>Замовлення навушників</h1>
+<!-- Варіант 15. Розрахунок вартості покупки. -->
+<form id="order">
+<label>Модель <select id="model"><option value="1250">Дротові — 1 250 грн</option><option value="2400">Бездротові — 2 400 грн</option></select></label>
+<label>Кількість <input id="quantity" type="number" required min="1" max="99" step="1" value="1"></label>
+<button>Розрахувати</button>
+<output id="total" aria-live="polite"></output>
+</form>
+<script>
+const form = document.querySelector("#order");
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  const price = Number(document.querySelector("#model").value);
+  const quantity = document.querySelector("#quantity").valueAsNumber;
+  document.querySelector("#total").textContent =
+    "До сплати " + new Intl.NumberFormat("uk-UA", {style:"currency", currency:"UAH"}).format(price * quantity);
+});
+</script>
+</html>
